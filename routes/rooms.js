@@ -5,6 +5,12 @@ const { Room } = require('../db.js')
 // POST: create a new room
 router.post('/rooms', async (req, res, next) => {
     try {
+        const { id } = req.body;
+
+        // if (!id || typeof id !== 'number' || !Number.isInteger(id)) {
+        //     return res.status(422).json({ error: "Invalid room_id. It should be a whole number" });
+        // }
+        
         await Room.create();
         res.json({ message: "New room added" });
     } catch (error) {
