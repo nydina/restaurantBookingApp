@@ -83,32 +83,6 @@ router.post('/reservations', async (req, res, next) => {
   }
 });
 
-// DELETE a reservation
-router.delete('/reservations', async (req, res, next) => {
-  try {
-    const { id } = req.body;
-
-    if (!id || typeof id !== 'number' || !Number.isInteger(id)) {
-      return res.status(422).json({ error: "Invalid reservation_id. It should be a whole number" });
-    }
-
-    const deletedReservation = await Reservation.destroy({
-      where: {
-        id: id
-      }
-    });
-
-    if (deletedReservation === 0) {
-      return res.status(404).json({ error: `Reservation with id:${id} not found` });
-    }
-
-    res.json({ message: `Reservation with id:${id} was deleted` });
-  } catch (error) {
-    // Handle errors
-    next(error);
-  }
-});
-
 // GET: read reservations
 router.get('/reservations', async (req, res, next) => {
   try {
@@ -156,5 +130,57 @@ router.put('/reservations/:id', async (req, res, next) => {
   }
 });
 
+// DELETE a reservation
+router.delete('/reservations', async (req, res, next) => {
+  try {
+    const { id } = req.body;
+
+    if (!id || typeof id !== 'number' || !Number.isInteger(id)) {
+      return res.status(422).json({ error: "Invalid reservation_id. It should be a whole number" });
+    }
+
+    const deletedReservation = await Reservation.destroy({
+      where: {
+        id: id
+      }
+    });
+
+    if (deletedReservation === 0) {
+      return res.status(404).json({ error: `Reservation with id:${id} not found` });
+    }
+
+    res.json({ message: `Reservation with id:${id} was deleted` });
+  } catch (error) {
+    // Handle errors
+    next(error);
+  }
+});
 
 module.exports = router;
+
+/* Examples on Postman
+POST
+{
+  "number_of_guests": 5,
+  "reservation_date": "2023-10-10",
+  "reservation_name": "John Doe",
+  "reservation_note": "Rooftop preference",
+  "reservation_status": 1,
+  "room_id": 2,
+  "spot_id": 1
+}
+PUT
+{
+  "number_of_guests": 3,
+  "reservation_date": "2023-09-10",
+  "reservation_name": "John Doe",
+  "reservation_note": "Special request for a window table",
+  "reservation_status": 1,
+  "room_id": 2,
+  "spot_id": 1
+}
+DELETE
+{
+  "id": 1
+}
+*/
