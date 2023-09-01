@@ -1,7 +1,8 @@
 const { Sequelize, DataTypes } = require('sequelize');
 
 // Create a new instance of Sequelize and connect to the database
-const sequelize = new Sequelize('postgres://drazafindratsira:@127.0.0.1:5432/postgres');
+// const sequelize = new Sequelize('postgres://drazafindratsira:@127.0.0.1:5432/postgres');
+const sequelize = new Sequelize('postgres://cokrdtyw:BdilfQR8AiVDB2IMiMkdX7HiDpaMrr11@trumpet.db.elephantsql.com/cokrdtyw');
 
 // Define the Reservation model
 const Reservation = sequelize.define('Reservation', {
@@ -58,9 +59,9 @@ const User = sequelize.define('User', {
 });
 
 // Synchronize the Reservation model with the database
-// Reservation.sync({ force: true }).then(() => {
-//    console.log("The table for the Reservation model was just (re)created!")
-// });
+Reservation.sync({ force: true }).then(() => {
+   console.log("The table for the Reservation model was just (re)created!")
+});
 
 // Synchronize the Room model with the database
 // Room.sync({ force: true }).then(() => {
