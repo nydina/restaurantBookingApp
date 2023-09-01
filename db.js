@@ -59,9 +59,9 @@ const User = sequelize.define('User', {
 });
 
 // Synchronize the Reservation model with the database
-Reservation.sync({ force: true }).then(() => {
-   console.log("The table for the Reservation model was just (re)created!")
-});
+// Reservation.sync({ force: true }).then(() => {
+//    console.log("The table for the Reservation model was just (re)created!")
+// });
 
 // Synchronize the Room model with the database
 // Room.sync({ force: true }).then(() => {
