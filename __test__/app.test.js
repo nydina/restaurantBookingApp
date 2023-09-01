@@ -3,7 +3,7 @@ const app = require('../app');
 
 describe('GET /api/reservations', () => {
   it('should return a 401 error', async () => {
-    const res = await request(app)
+    await request(app)
       .get('/api/reservations')
       .expect('Content-Type', /json/)
       .expect(401);
